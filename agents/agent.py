@@ -18,7 +18,7 @@ class My_Agent():
 
         # Score tracker and learning parameters
         self.best_w = None
-        self.best_score = -np.inf
+        self.best_score = np.inf
         self.noise_scale = 0.1
 
         # Episode variables
@@ -47,7 +47,7 @@ class My_Agent():
     def learn(self):
         # Learn by random policy search, using a reward-based score
         self.score = self.total_reward / float(self.count) if self.count else 0.0
-        if self.score > self.best_score:
+        if self.score < self.best_score:
             self.best_score = self.score
             self.best_w = self.w
             self.noise_scale = max(0.5 * self.noise_scale, 0.01)

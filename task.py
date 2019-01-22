@@ -76,7 +76,7 @@ class Task1():
 
     def get_reward(self):
         """Uses current pose of sim to return reward."""
-        reward = 1.-.001*(abs(self.sim.pose[:3] - self.target_pos)).sum()
+        reward = -1.+.01*(abs(self.sim.pose[:3] - self.target_pos)).sum()
         return reward
 
     def step(self, rotor_speeds):
@@ -124,7 +124,7 @@ class Task2():
 
     def get_reward(self):
         """Uses current pose of sim to return reward."""
-        reward = 1.-.001*(abs(self.sim.pose[:3] - self.target_pos)).sum()
+        reward = -1.+.01*(abs(self.sim.pose[:3] - self.target_pos)).sum()
         return reward
 
     def step(self, rotor_speeds):
@@ -172,10 +172,12 @@ class Task3():
 
     def get_reward(self):
         """Uses current pose of sim to return reward."""
-        if (self.sim.pose[:3] == self.target_pos).all():
-            reward = 100
+        if ((self.sim.pose[:3] == self.target_pos).all()):
+            reward = -100
+        if (self.sim.pose[2] == self.target_pos[2]):
+            reward = -10
         else:
-            reward = 1.-.001*(abs(self.sim.pose[:3] - self.target_pos)).sum()
+            reward = -1.+.01*(abs(self.sim.pose[:3] - self.target_pos)).sum()
         return reward
 
     def step(self, rotor_speeds):
